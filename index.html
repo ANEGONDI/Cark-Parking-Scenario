@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://kit.fontawesome.com/04bd72a003.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+  <title> Car Parking Scenario </title>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="menu-side-bar py-3">
+      <button class="menu-button button-style" id="home"> Home </button>
+      <button class="menu-button" id="add-scenario"> Add Scenario </button>
+      <button class="menu-button" id="all-scenarios"> All Scenarios </button>
+      <button class="menu-button" id="add-vehicle"> Add Vehicle </button>
+    </div>
+    <div class="content-container py-3">
+      <div class="home-container" id="home-container">
+        <div class="add-vehicle-container">
+          <label class="label-font"> Scenario </label>
+          <select id="select-scenario-home" class="form-control select">
+            <option value="Select Scenario" selected=""> Select Scenario </option>
+          </select>
+        </div>
+        <table class="table table-margin">
+          <thead class="table-dark">
+            <th> Vehicle Id </th>
+            <th> Vehicle Name </th>
+            <th> Position X </th>
+            <th> Position Y </th>
+            <th> Speed </th>
+            <th> Direction </th>
+            <th> Edit </th>
+            <th> Delete </th>
+            <th> Save </th>
+          </thead>
+          <tbody id="table-body-home">
+            
+          </tbody>
+        </table>
+        <div class="d-flex flex-row justify-content-end">
+          <button class="btn btn-warning mx-3" id="updateBtnEl"> Update </button>
+          <button class="btn btn-success button-simulation" id="start"> Start Simulation </button>
+          <button class="btn btn-info" id="stop"> Stop Simulation </button>
+        </div>
+        <div class="graph-container" id="graph">
+
+        </div>
+      </div>
+      <div id="scenario-add" class="d-none">
+        <p class="label-font"> Scenario / add </p>
+        <h2 class="head"> Add Scenario </h2>
+        <div class="input-scenario-container">
+          <div class="input-container">
+            <label for="scenario-name" class="label-font"> Scenario Name </label>
+            <input id="scenario-name" type="text" class="form-control input" placeholder="Enter Scenario Name" />
+          </div>
+          <div class="input-container">
+            <label for="scenario-time" class="label-font"> Scenario Time (seconds) </label>
+            <input id="scenario-time" type="text" class="form-control input" placeholder="Enter Scenario Time"/>
+          </div>
+        </div>
+        <div class="btn-container">
+          <button id="add-btn-scenario" class="btn btn-success button-add"> Add </button>
+          <button id="reset-btn-scenario" class="btn btn-warning button-add mr-2"> Reset </button>
+          <button id="goback-btn-scenario" class="btn btn-primary button-add mr-2"> Go Back </button>
+        </div>
+      </div>
+      <div class="d-flex flex-column d-none" id="scenarios-table">
+        <div class="all-scenarios-container">
+          <div>
+            <p class="label-font"> All Scenarios </p>
+          </div>
+          <div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-info button-scenario" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">
+              Add New Scenario
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Add New Scenario </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="input-container2 my-3">
+                      <label for="scenario-name1" class="label-font text-dark"> Scenario Name </label>
+                      <input id="scenario-name1" type="text" class="form-control" placeholder="Enter Scenario Name" />
+                    </div>
+                    <div class="input-container2">
+                      <label for="scenario-time1" class="label-font text-dark"> Scenario Time (seconds) </label>
+                      <input id="scenario-time1" type="text" class="form-control" placeholder="Enter Scenario Time" />
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="add-scenario-btn1"> Add
+                    </button>
+                    <button type="button" class="btn btn-warning" id="reset-scenario-btn1"> Reset
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success button-scenario" data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop">
+              Add Vehicle
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"> Add Vehicle </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="add-vehicle-container my-3">
+                      <label for="select-scenario1" class="label-font text-dark"> Scenarios List </label>
+                      <select id="select-scenario1" class="form-control select2">
+                        <option value="Select Scenario" selected=""> Select Scenario </option>
+                      </select>
+                    </div>
+                    <div class="add-vehicle-container my-3">
+                      <label class="label-font text-dark" for="v-name1"> Vehicle Name </label>
+                      <input type="text" class="form-control" id="v-name1"
+                        placeholder="Enter Vehicle Name" />
+                    </div>
+                    <div class="add-vehicle-container my-3">
+                      <label class="label-font text-dark" for="speed1"> Speed </label>
+                      <input type="text" class="form-control" id="speed1" placeholder="Enter Speed" />
+                    </div>
+                    <div class="add-vehicle-container my-3">
+                      <label class="label-font text-dark" for="px1"> Position X </label>
+                      <input type="text" class="form-control" id="px1" placeholder="Enter the Value" />
+                    </div>
+                    <div class="add-vehicle-container my-3">
+                      <label class="label-font text-dark" for="py1"> Position Y </label>
+                      <input type="text" class="form-control" id="py1" placeholder="Enter the Value" />
+                    </div>
+                    <div class="add-vehicle-container">
+                      <label class="label-font text-dark"> Direction </label>
+                      <select id="direction1" class="form-control select2">
+                        <option value="Towards" selected=""> Towards </option>
+                        <option value="Backwards"> Backwards </option>
+                        <option value="Upwards"> Upwards </option>
+                        <option value="Downwards"> Downwards </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="add-v1"> Add </button>
+                    <button type="button" class="btn btn-warning" id="reset-v1"> Reset </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-danger button-scenario" id="delete1"> Delete All </button>
+            <button class="btn btn-warning button-scenario" id="update1"> Update </button>
+          </div>
+        </div>
+        <table class="table table-margin">
+          <thead class="table-dark">
+            <th> Scenario Id </th>
+            <th> Scenario Name </th>
+            <th> Scenario Time </th>
+            <th> Number of Vehicles </th>
+            <th> Add Vehicle </th>
+            <th> Edit </th>
+            <th> Delete </th>
+            <th> Save </th>
+          </thead>
+          <tbody id="scenario-table-body">
+
+          </tbody>
+        </table>
+      </div>
+      <div id="vehicle-details" class="d-none">
+        <p class="label-font"> Vehicle / add </p>
+        <h2 class="head"> Add Vehicle </h2>
+        <div class="add-vehicle-card-container">
+          <div class="vehicle-container">
+            <div class="add-vehicle-container">
+              <label for="select-scenario" class="label-font"> Scenarios List </label>
+              <select id="select-scenario" class="form-control select">
+                <option value="Select Scenario" selected="" id="scelected1"> Select Scenario </option>
+              </select>
+            </div>
+            <div class="add-vehicle-container">
+              <label for="v-name" class="label-font"> Vehicle Name </label>
+              <input id="v-name" type="text" class="form-control input input-vehicle"
+                placeholder="Enter Vehicle Name" />
+            </div>
+            <div class="add-vehicle-container">
+              <label for="speed" class="label-font"> Speed </label>
+              <input id="speed" type="text" class="form-control input input-vehicle" placeholder="Enter Speed" />
+            </div>
+          </div>
+          <div class="vehicle-container my-3">
+            <div class="add-vehicle-container">
+              <label for="px" class="label-font"> Position X </label>
+              <input id="px" type="text" class="form-control input input-vehicle" placeholder="Enter the Value" />
+            </div>
+            <div class="add-vehicle-container">
+              <label for="py" class="label-font"> Position Y </label>
+              <input id="py" type="text" class="form-control input input-vehicle" placeholder="Enter the Value" />
+            </div>
+            <div class="add-vehicle-container">
+              <label for="direction" class="label-font"> Direction </label>
+              <select id="direction" class="form-control select">
+                <option value="Towards" selected=""> Towards </option>
+                <option value="Backwards"> Backwards </option>
+                <option value="Upwards"> Upwards </option>
+                <option value="Downwards"> Downwards </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="btn-container">
+          <button id="add-v" class="btn btn-success button-add"> Add </button>
+          <button id="reset-v" class="btn btn-warning button-add mr-2"> Reset </button>
+          <button id="goback-v" class="btn btn-primary button-add mr-2"> Go Back </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
